@@ -26,16 +26,23 @@ y = np.linspace(alt_0, alt_end, len(x)) # "[0]" index at the end or "y, =" shoul
 
 # Create the animation 
 
-fig = plt.figure(figsize=(40*cm,20*cm), dpi=120) # facecolor=(.8, .8, .8)
+fig0 = plt.figure(figsize=(40*cm,20*cm), dpi=120) # facecolor=(.8, .8, .8)
+#fig1 = plt.figure(figsize=(18*cm,18*cm))
+#fig3 = plt.figure(figsize=(18*cm,18*cm))
 gs = gridspec.GridSpec(2,2)
 
-ax0 = fig.add_subplot(gs[0,:]) # facecolor
-trajectory = ax0.plot([],[])[0]
-plt.xlim(x[0], x[-1]); plt.ylim(0,y[-1]+1)
+ax0 = fig0.add_subplot(gs[0,:]); plt.xlim(x[0], x[-1]); plt.ylim(0,y[-1]+1) # facecolor
+ax1 = fig0.add_subplot(gs[1,0]); plt.xlim(x[0], x[-1]); plt.ylim(0,y[-1]+1)
+ax2 = fig0.add_subplot(gs[1,1]); plt.xlim(x[0], x[-1]); plt.ylim(0,y[-1]+1)
+trajectory0 = ax0.plot([],[])[0]
+trajectory1 = ax1.plot([],[])[0]
+trajectory2 = ax2.plot([],[])[0]
 
 def animate(frame): # update plots
-    trajectory.set_data(x[0:frame], y[0:frame])
-    return trajectory,
+    trajectory0.set_data(x[0:frame], y[0:frame])
+    trajectory1.set_data(x[0:frame], y[0:frame])
+    trajectory2.set_data(x[0:frame], y[0:frame])
+    return trajectory0, trajectory1, trajectory2
 
-animation.FuncAnimation(fig, animate, frames=len(t), interval=20, repeat=True, blit=True) # blit should be true for faster fig update
+animation.FuncAnimation(fig0, animate, frames=len(t), interval=20, repeat=True, blit=True) # blit should be true for faster fig0 update
 plt.show()
