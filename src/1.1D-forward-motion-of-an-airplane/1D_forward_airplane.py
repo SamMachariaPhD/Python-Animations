@@ -34,7 +34,7 @@ gs = gridspec.GridSpec(2,2)
 ax0 = fig0.add_subplot(gs[0,:]); plt.xlim(x[0], x[-1]); plt.ylim(0,y[-1]+1) # facecolor
 ax1 = fig0.add_subplot(gs[1,0]); plt.xlim(x[0], x[-1]); plt.ylim(0,y[-1]+1)
 ax2 = fig0.add_subplot(gs[1,1]); plt.xlim(x[0], x[-1]); plt.ylim(0,y[-1]+1)
-trajectory0 = ax0.plot([],[])[0]
+trajectory0 = ax0.plot([],[], ls='-.')[0]
 trajectory1 = ax1.plot([],[])[0]
 trajectory2 = ax2.plot([],[])[0]
 
