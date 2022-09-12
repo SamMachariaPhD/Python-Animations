@@ -4,6 +4,8 @@ import numpy as np
 import matplotlib.pyplot as plt 
 import matplotlib.animation as animation
 import matplotlib.gridspec as gridspec 
+import matplotlib.patheffects as path_effects 
+
 plt.style.use("ggplot")
 cm = 1/2.54
 
@@ -24,6 +26,7 @@ y = np.linspace(alt_0, alt_end, len(x)) # "[0]" index at the end or "y, =" shoul
 #print(y)
 #exit()
 
+
 # Create the animation 
 
 fig0 = plt.figure(figsize=(40*cm,20*cm), dpi=120) # facecolor=(.8, .8, .8)
@@ -38,11 +41,14 @@ trajectory0 = ax0.plot([],[], ls='-.')[0]
 trajectory1 = ax1.plot([],[])[0]
 trajectory2 = ax2.plot([],[])[0]
 
+l0 = ax0.plot([],[], ls='-', lw=10, path_effects=[path_effects.SimpleLineShadow(), path_effects.Normal()])[0]
+
 def animate(frame): # update plots
     trajectory0.set_data(x[0:frame], y[0:frame])
     trajectory1.set_data(x[0:frame], y[0:frame])
     trajectory2.set_data(t[0:frame], x[0:frame])
-    return trajectory0, trajectory1, trajectory2
+    l0.set_data([0+x[frame],20+x[frame]],[2,2])
+    return trajectory0, trajectory1, trajectory2, l0
 
 animation.FuncAnimation(fig0, animate, frames=len(t), interval=20, repeat=True, blit=True) # blit should be true for faster fig0 update
 plt.show()
